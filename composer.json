@@ -1,0 +1,26 @@
+{
+    "name": "smater/curl",
+    "description": "Http请求扩展",
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chenxiansen",
+            "email": "1849132652@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Curl\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Curl\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev"
+}
