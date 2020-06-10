@@ -8,8 +8,9 @@
 
 namespace Curl\Core;
 
+use Curl\Core\Contracts\Curl as CurlContract;
 
-class Curl
+class Curl implements CurlContract
 {
 
     private $curl;
@@ -18,79 +19,46 @@ class Curl
 
     public function __construct()
     {
-        if(isset($this->curl))
+        if(! isset($this->curl))
         {
-            //请求前，先重置请求信息
-            $this->_reset();
-            return $this->curl;
+            $this->init();
         }
-        $this->curl = curl_init();
     }
 
-    public function get($url, $data = array())
+    public function get($uri)
     {
         //设置请求参数
-        curl_setopt($this->curl, CURLOPT_URL, $url);
+        curl_setopt($this->curl, CURLOPT_URL, $uri);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($this->curl, CURLOPT_HEADER, 0);
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);    //绕过ssl验证
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
         //打印请求信息
         echo 'Curl Parameter: ' . json_encode($this->_getInfo());
         //执行请求
-        $this->_exec();
+        return $this->exec();
     }
 
-    public function post()
+    public function post($uri,$data = array())
     {
 
     }
 
-    /**
-     * @return 返回执行结果
-     */
-    private function _exec()
+
+    protected function init()
     {
-        return curl_exec($this->curl);
+        $this->curl = curl_init();
     }
 
-    /**
-     * @return 配置参数查看
-     */
-    public function _getInfo()
+    protected function exec()
     {
-        return curl_getinfo($this->curl);
-    }
-
-    /**
-     * 报错信息
-     */
-    public function _error()
-    {
-        if(curl_errno($this->curl))
-        {
-            echo 'Curl error: ' . curl_error($this->curl);
-        }
-    }
-
-    /**
-     * @return 版本信息
-     */
-    public function _version()
-    {
-        return curl_version();
-    }
-
-    /**
-     * 重置
-     */
-    private function _reset()
-    {
-        return curl_reset($this->curl);
-    }
-
-    /**
-     * 释放资源
-     */
-    public function __destruct()
-    {
+        //执行并获取内容
+        $result = curl_exec($this->curl);
+        //释放curl句柄
         curl_close($this->curl);
+        unset($this->curl);
+
+        return $result;
     }
+
 }

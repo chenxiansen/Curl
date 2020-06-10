@@ -8,8 +8,17 @@
 
 namespace Curl\Core;
 
+use Curl\Core\Contracts\MultiCurl as MultiCurlContract;
 
-class MultiCurl
+class MultiCurl implements MultiCurlContract
 {
+    public function get($uri,$data = array())
+    {
 
+    }
+
+    public function post($uri,$data = array())
+    {
+
+    }
 }
