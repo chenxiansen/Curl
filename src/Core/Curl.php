@@ -34,7 +34,7 @@ class Curl implements CurlContract
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);    //绕过ssl验证
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
         //打印请求信息
-        echo 'Curl Parameter: ' . json_encode($this->_getInfo());
+        echo 'Curl Parameter: ' . json_encode($this->getInfo());
         //执行请求
         return $this->exec();
     }
@@ -61,4 +61,9 @@ class Curl implements CurlContract
         return $result;
     }
 
+
+    protected function getInfo()
+    {
+        return curl_getinfo($this->curl);
+    }
 }
