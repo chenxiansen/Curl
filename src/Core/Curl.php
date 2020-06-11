@@ -22,6 +22,9 @@ class Curl implements CurlContract
         CURLOPT_PROXYAUTH                 =>     null,                //代理认证模式    CURLAUTH_BASIC
         CURLOPT_PROXY                     =>     null,                //代理服务器ip
         CURLOPT_PROXYPORT                 =>     null,                //代理服务器port
+        CURLOPT_URL                       =>     null,                //uri地址
+        CURLOPT_POST                      =>     null,                //post请求
+        CURLOPT_POSTFIELDS                =>     null,                //post请求内容
     ];
 
     public function __construct()
@@ -86,9 +89,9 @@ class Curl implements CurlContract
         //执行并获取内容
         $result = curl_exec($this->curl);
         //错误检测
-        if($this->error())
+        if($error = $this->error())
         {
-            return $this->error();
+            return $error;
         }
         $this->close();
 
