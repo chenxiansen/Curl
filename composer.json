@@ -14,11 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Curl\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
+            "Curl\\": "src/",
             "Curl\\Tests\\": "tests/"
         }
     },
