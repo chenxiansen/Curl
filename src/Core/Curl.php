@@ -25,12 +25,7 @@ class Curl implements CurlContract
         {
             $this->init();
         }
-        curl_reset($this->curl);
-        curl_setopt($this->curl, CURLOPT_TIMEOUT, $this->config["timeout"]);
-        curl_setopt($this->curl, CURLOPT_HEADER, $this->config["header"]);
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, $this->config["return_transfer"]);
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);    //绕过ssl验证
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
+        $this->resetConf($this->config);
     }
 
     public function get($uri)
@@ -60,16 +55,15 @@ class Curl implements CurlContract
     {
         //执行并获取内容
         $result = curl_exec($this->curl);
-        //释放curl句柄
-        curl_close($this->curl);
+        $this->close();
 
         return $result;
     }
 
     //查看配置信息
-    public function getInfo($ch)
+    public function getInfo()
     {
-        return curl_getinfo($ch ?? $this->curl);
+        return curl_getinfo($this->curl);
     }
 
     //设置参数
@@ -82,6 +76,18 @@ class Curl implements CurlContract
                 $this->config[$c] = $config[$c];
             }
         }
+        $this->resetConf($this->config);
+    }
+
+    //重置资源
+    private function resetConf($config)
+    {
+        curl_reset($this->curl);
+        curl_setopt($this->curl, CURLOPT_TIMEOUT, $config["timeout"]);
+        curl_setopt($this->curl, CURLOPT_HEADER, $config["header"]);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, $config["return_transfer"]);
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);    //绕过ssl验证
+        curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
     }
 
     //查看参数
@@ -90,4 +96,9 @@ class Curl implements CurlContract
         return $this->config;
     }
 
+    //释放资源
+    protected function close($ch = null)
+    {
+        curl_close($ch ?? $this->curl);
+    }
 }
