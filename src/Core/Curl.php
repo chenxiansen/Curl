@@ -75,9 +75,12 @@ class Curl implements CurlContract
     //设置参数
     public function setConf($config = array())
     {
-        foreach ($this->config as $conf)
+        foreach ($this->config as $c => $v)
         {
-            $this->config[$conf] = $config[$conf];
+            if(array_key_exists($c,$config))
+            {
+                $this->config[$c] = $config[$c];
+            }
         }
     }
 
