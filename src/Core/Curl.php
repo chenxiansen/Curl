@@ -23,10 +23,10 @@ class Curl implements CurlContract
         CURLOPT_SSL_VERIFYPEER            =>     false,               //默认禁用https
         CURLOPT_SSL_VERIFYHOST            =>     false,               //默认禁用https
         CURLOPT_PROXYAUTH                 =>     null,                //代理认证模式    CURLAUTH_BASIC
-        CURLOPT_PROXY                     =>     null,                //代理服务器ip
-        CURLOPT_PROXYPORT                 =>     null,                //代理服务器port
+        CURLOPT_PROXY                     =>     null,                //代理IP
+        CURLOPT_PROXYPORT                 =>     null,                //代理端口
         CURLOPT_PROXYTYPE                 =>     null,                //代理类型    CURLPROXY_HTTP
-        CURLOPT_FOLLOWLOCATION            =>     1,                   //是否允许重定向 1：0 ，tru：false
+        CURLOPT_FOLLOWLOCATION            =>     1,                   //是否允许重定向 1：0 ，true：false
         CURLOPT_USERAGENT                 =>     "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0",                //浏览器头文件：'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'
     ];
 
