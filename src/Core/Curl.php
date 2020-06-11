@@ -14,9 +14,14 @@ class Curl implements CurlContract
 {
     private $curl;
     private $config = [
-        "timeout"            =>    10,                   //超时时间
-        "header"             =>     0,                   //启用时会将头文件的信息作为数据流输出。 1：0 ，true：false
-        "return_transfer"    =>     1,                   //TRUE 将curl_exec()获取的信息以字符串返回，而不是直接输出。
+        "CURLOPT_TIMEOUT"                   =>    10,                   //超时时间
+        "CURLOPT_HEADER"                    =>     0,                   //启用时会将头文件的信息作为数据流输出。 1：0 ，true：false
+        "CURLOPT_RETURNTRANSFER"            =>     1,                   //TRUE 将curl_exec()获取的信息以字符串返回，而不是直接输出。
+        "CURLOPT_SSL_VERIFYPEER"            =>     false,               //默认禁用https
+        "CURLOPT_SSL_VERIFYHOST"            =>     false,               //默认禁用https
+        "CURLOPT_PROXYAUTH"                 =>     null,                //代理认证模式
+        "CURLOPT_PROXY"                     =>     null,                //代理服务器ip
+        "CURLOPT_PROXYPORT"                 =>     null,                //代理服务器port
     ];
 
     public function __construct()
@@ -36,7 +41,7 @@ class Curl implements CurlContract
         return $this->exec();
     }
 
-    public function post($uri,$data = array())
+    public function post($uri,$data = [])
     {
         curl_setopt($this->curl, CURLOPT_URL, $uri);
         curl_setopt($this->curl, CURLOPT_POST, 1);
@@ -67,7 +72,7 @@ class Curl implements CurlContract
     }
 
     //设置参数
-    public function setConf($config = array())
+    public function setConf(array $config)
     {
         foreach ($this->config as $c => $v)
         {
@@ -80,14 +85,17 @@ class Curl implements CurlContract
     }
 
     //重置资源
-    private function resetConf($config)
+    private function resetConf(array $config)
     {
         curl_reset($this->curl);
-        curl_setopt($this->curl, CURLOPT_TIMEOUT, $config["timeout"]);
-        curl_setopt($this->curl, CURLOPT_HEADER, $config["header"]);
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, $config["return_transfer"]);
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);    //绕过ssl验证
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
+        foreach ($config as $c => $v)
+        {
+            if($config[$c] === null)
+            {
+                unset($config[$c]);
+            }
+        }
+        curl_setopt_array($this->curl,$config);
     }
 
     //查看参数

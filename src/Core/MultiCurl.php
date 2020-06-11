@@ -12,7 +12,7 @@ use Curl\Core\Contracts\MultiCurl as MultiCurlContract;
 
 class MultiCurl implements MultiCurlContract
 {
-    public function get($uri,$data = array())
+    public function get($uri)
     {
 
     }

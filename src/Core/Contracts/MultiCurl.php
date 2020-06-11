@@ -11,7 +11,7 @@ namespace Curl\Core\Contracts;
 
 interface MultiCurl
 {
-    public function get($uri,$data = []);
+    public function get($uri);
 
     public function post($uri,$data = []);
 }

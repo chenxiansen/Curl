@@ -16,6 +16,9 @@ class Test
     public function index()
     {
         $curl = new Curl();
+        $curl->setConf([
+            "timeout"=>100
+        ]);
         var_dump($curl->get("http://www.baidu.com"));
     }
 }
