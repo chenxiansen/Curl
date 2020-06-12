@@ -12,7 +12,6 @@ use Curl\HttpCore\Register\HttpRegister;
 
 class Http extends HttpRegister
 {
-    public $http;
     public function __construct()
     {
         parent::__construct();
@@ -21,12 +20,12 @@ class Http extends HttpRegister
     //get请求
     public function get($uri)
     {
-        return $this->container->make("get",$uri);
+        return $this->http->make("get",$uri);
     }
 
     //post请求
     public function post($uri,$data)
     {
-        return $this->container->make("post",$uri,$data);
+        return $this->http->make("post",$uri,$data);
     }
 }

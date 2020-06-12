@@ -15,18 +15,17 @@ use Curl\HttpCore\Container\HttpContainer;
 
 class HttpRegister
 {
-    public $http;
-    protected $container;
+    protected $http;
 
     public function __construct()
     {
-        $this->container = new HttpContainer();
+        $this->http = new HttpContainer();
 
-        $this->container->bind("get",function ($uri){
+        $this->http->bind("get",function ($uri){
             return new HttpGet($uri);
         });
 
-        $this->container->bind("post",function ($uri,$data){
+        $this->http->bind("post",function ($uri,$data){
             return new HttpPost($uri,$data);
         });
     }
