@@ -118,7 +118,10 @@ class Curl implements CurlContract
     //释放资源
     private function close()
     {
-        curl_close($this->curl);
+        if(is_resource($this->curl))
+        {
+            curl_close($this->curl);
+        }
     }
 
     //错误检测
@@ -132,5 +135,11 @@ class Curl implements CurlContract
             return ["error_msg"=>$error_msg,"error_no"=>$error_no];
         }
         return false;
+    }
+
+    //关闭资源
+    public function __destruct()
+    {
+        $this->close();
     }
 }
