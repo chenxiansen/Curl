@@ -6,9 +6,9 @@
  * Time: 18:03
  */
 
-namespace Curl\Core;
+namespace Curl\HttpCore;
 
-use Curl\Core\Register\HttpRegister;
+use Curl\HttpCore\Register\HttpRegister;
 
 class Http extends HttpRegister
 {

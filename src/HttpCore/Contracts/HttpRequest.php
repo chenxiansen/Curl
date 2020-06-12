@@ -6,7 +6,7 @@
  * Time: 17:53
  */
 
-namespace Curl\Core\Contracts;
+namespace Curl\HttpCore\Contracts;
 
 
 interface HttpRequest

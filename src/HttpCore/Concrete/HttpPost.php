@@ -6,10 +6,10 @@
  * Time: 17:54
  */
 
-namespace Curl\Core\Concrete;
+namespace Curl\HttpCore\Concrete;
 
 
-use Curl\Core\Contracts\HttpRequest as HttpContract;
+use Curl\HttpCore\Contracts\HttpRequest as HttpContract;
 
 class HttpPost implements HttpContract
 {

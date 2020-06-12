@@ -6,12 +6,12 @@
  * Time: 17:56
  */
 
-namespace Curl\Core\Register;
+namespace Curl\HttpCore\Register;
 
 
-use Curl\Core\Concrete\HttpGet;
-use Curl\Core\Concrete\HttpPost;
-use Curl\Core\Container\HttpContainer;
+use Curl\HttpCore\Concrete\HttpGet;
+use Curl\HttpCore\Concrete\HttpPost;
+use Curl\HttpCore\Container\HttpContainer;
 
 class HttpRegister
 {

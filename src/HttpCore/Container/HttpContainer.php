@@ -6,7 +6,7 @@
  * Time: 17:45
  */
 
-namespace Curl\Core\Container;
+namespace Curl\HttpCore\Container;
 
 
 class HttpContainer
