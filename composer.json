@@ -14,7 +14,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Curl\\": "src/"
+            "Curl\\": "src/",
+            "Test\\": "test/"
         }
     },
     "minimum-stability": "dev"

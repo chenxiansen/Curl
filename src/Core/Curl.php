@@ -39,7 +39,7 @@ class Curl implements CurlContract
         $this->resetConf($this->config);
     }
 
-    public function get($uri)
+    public function get($uri = null)
     {
         $this->setConf([
             CURLOPT_URL           =>$uri
@@ -47,7 +47,7 @@ class Curl implements CurlContract
         return $this->exec();
     }
 
-    public function post($uri,$data = [])
+    public function post($uri = null, $data = [])
     {
         $this->setConf([
             CURLOPT_URL           =>$uri,
@@ -142,4 +142,6 @@ class Curl implements CurlContract
     {
         $this->close();
     }
+
+
 }
